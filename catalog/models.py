@@ -8,6 +8,12 @@ class Category(models.Model):
     # Для линтера
     objects: Manager['Category']
 
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.name
+
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
@@ -24,6 +30,12 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата редактирования продукта')
     # Для линтера
     objects: Manager['Product']
+
+    def __str__(self):
+        return f'{self.name} {self.price}'
+
+    def __repr__(self):
+        return f'{self.name} {self.price}'
 
     class Meta:
         verbose_name = 'продукт'
