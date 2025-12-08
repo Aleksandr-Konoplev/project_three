@@ -1,24 +1,53 @@
 {% extends 'base.html' %}
 {% load my_tags %}
 {% block content %}
-<div class="album py-5 bg-body-tertiary">
-        <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <div class="col">
-                    <div class="card shadow-sm">
 
-                        <img src="{{ product.image|media_filter }}" alt="нет изображения">
-                        <div class="card-body"><p class="card-text">{{ product.description }}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+<div class="py-5 bg-body-tertiary">
+    <div class="container">
+        <!-- Одиночная карточка продукта -->
+        <div class="card mb-4 border-0 shadow-sm"> <!-- Убрали темный фон, добавили тень -->
+            <div class="row g-0">
+                <!-- Левая часть: изображение продукта -->
+                <div class="col-md-4">
+                    <img src="{{ product.image|media_filter }}" class="img-fluid rounded-start" alt="нет изображения" style="height: 100%; object-fit: cover;">
+                    <!-- rounded-start для скругления левых углов изображения -->
+                </div>
+                <!-- Правая часть: описание и кнопки -->
+                <div class="col-md-8 d-flex flex-column">
+                    <div class="card-body flex-grow-1 d-flex flex-column">
+                        <h3 class="card-title mb-3">{{ product.name }}</h3>
+                        <p class="card-text mb-4">{{ product.description }}</p>
+
+                        <div class="mt-auto">
+                            <!-- Цена -->
+                            <div class="d-flex justify-content-end align-items-center mb-3">
+                                <h5 class="mb-0">{{ product.price }} &#8381;</h5>
+                            </div>
+                            <!--Кнопки-->
+                            <div class="row g-2 d-flex justify-content-end">
+                                <div class="btn-group col-auto">
+                                    <button type="button" class="btn btn-outline-secondary">Быстрая покупка</button>
+                                    <button type="button" class="btn btn-outline-secondary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                             class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                            <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                            <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                            <path d="M17 17h-11v-14h-2" />
+                                            <path d="M6 5l14 1l-1 7h-13" />
+                                        </svg>
+                                    </button>
                                 </div>
-                                <small class="text-body-secondary">{{ product.price }}</small></div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 {% endblock %}
