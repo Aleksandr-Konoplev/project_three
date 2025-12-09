@@ -77,20 +77,9 @@ project_three/
 ├── static/
 │   └── catalog/
 │       ├── css/
-│       │   └── bootstrap.min.css
 │       ├── img/
 │       │   └── favicons/
-│       │       ├── android-chrome-192x192.png
-│       │       ├── android-chrome-512x512.png
-│       │       ├── apple-touch-icon.png
-│       │       ├── favicon.ico
-│       │       ├── favicon-16x16.png
-│       │       ├── favicon-32x32.png
-│       │       ├── safari-pinned-tab.svg
-│       │       └── manifest.json
 │       └── js/
-│           ├── bootstrap.bundle.min.js
-│           └── color-modes.js
 ├── env/                        # Файлы окружения
 ├── env.example
 ├── .flake8                     # Конфигурация линтера

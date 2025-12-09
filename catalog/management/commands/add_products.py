@@ -7,10 +7,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        # Удаляем все из бд
-        Product.objects.all().delete()
-        Category.objects.all().delete()
-
         clothes, _ = Category.objects.get_or_create(name='Одежда', description='Категория одежды')
         shoes, _ = Category.objects.get_or_create(name='Обувь', description='Категория обуви')
 
