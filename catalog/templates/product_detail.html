@@ -15,11 +15,15 @@
                 <div class="col-md-8 d-flex flex-column">
                     <div class="card-body flex-grow-1 d-flex flex-column">
                         <h3 class="card-title mb-3">{{ product.name }}</h3>
+                        <h5>Категория: {{ product.category }}</h5>
                         <p class="card-text mb-4">{{ product.description }}</p>
                         <div class="mt-auto">
                             <!-- Цена -->
                             <div class="d-flex justify-content-end align-items-center mb-3">
                                 <h5 class="mb-0">{{ product.price }} &#8381;</h5>
+                            </div>
+                            <div class="d-flex justify-content-end align-items-center mb-3">
+                                <h5 class="mb-0">В продаже с {{ product.created_at|date:'d M Y' }}</h5>
                             </div>
                             <!--Кнопки-->
                             <div class="d-flex justify-content-between align-items-center mt-2">
