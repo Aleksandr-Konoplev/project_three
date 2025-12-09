@@ -1,9 +1,7 @@
 # Project Three
 
-Проект на **Django**, который на данный момент выводит две страницы: 
+Проект на **Django**, онлайн магазин
 
-- **Главная** (`home`)  
-- **Контакты** (`contacts`)
 
 ---
 
@@ -12,7 +10,7 @@
 - Python 3.13  
 - Django  
 - Bootstrap  
-- SQLite  
+- Postgresql
 
 ---
 
@@ -28,15 +26,31 @@ poetry install
 python manage.py runserver
 ```
 
-3. Открыть в браузере:
+3. Открыть в браузере локально после запуска сервера:
 ```bash
 http://127.0.0.1:8000/
 ```
 
-4. Команда для тестового заполнения БД (ВНИМАНИЕ: Данная команда удалит данные из БД):
-```bash
-python manage.py add_products
-```
+4. Команды для тестового заполнения БД:
+
+    1. Простое добавление, добавит 3 товара в 2 категории. Команда вызывается без аргументов:
+        ```bash
+        python manage.py add_products
+        ```
+    2. Команда полностью очистит категории и продукты, *(ВНИМАНИЕ: данная команда удалит данные из БД)* Команда вызывается без аргументов:
+        ```bash
+        python manage.py clean_data_base
+        ```
+    3. Команда заполнит базу данных из json файла. Запуск команды с указанием пути к JSON-фикстуре:
+        ```bash
+        python manage.py add_products path/to/fixture.json
+        ```
+   4. Что бы сохранить данные из БД в JSON-фикстуре, используйте команду:
+        ```bash
+        python -Xutf8 manage.py dumpdata catalog.Category catalog.Product --output file_name.json --indent 4
+
+        ```
+  
 
 ---
 
@@ -53,7 +67,6 @@ project_three/
 │   │       ├── includes/
 │   │       │   └── inc_menu.html
 │   │       ├── base.html
-│   │       ├── base_html
 │   │       ├── product_detail.html
 │   │       └── product_list.html
 │   ├── templatetags/
