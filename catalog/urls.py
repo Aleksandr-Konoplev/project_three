@@ -1,0 +1,12 @@
+from catalog.apps import CatalogConfig
+from django.urls import path
+
+from catalog.views import index, product_list, product_detail
+
+app_name = CatalogConfig.name
+
+urlpatterns = [
+    path('base', index, name='base'),
+    path('', product_list, name='product_list'),
+    path('product_detail/<int:pk>', product_detail, name='product_detail'),
+]
