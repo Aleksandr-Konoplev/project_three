@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <div class="collapse text-bg-dark" id="navbarHeader">
     <div class="container">
         <div class="row">
@@ -7,9 +8,8 @@
                     премиальных материалов с вниманием к деталям и идеальной посадке.</p></div>
             <div class="col-sm-4 offset-md-1 py-4 text-end"><h4>Меню</h4>
                 <ul class="list-unstyled text-end">
-                    <li><!--suppress HtmlUnknownTarget -->
-                        <a href="{% url 'catalog:product_list' %}" title="Перейти на главную страницу" class="text-white">Главная</a></li>
-                    <li><a href="#" class="text-white">Каталог</a></li>
+                    <li><a href="{% url 'catalog:product_list' %}" title="Перейти на главную страницу" class="text-white">Главная</a></li>
+                    <li><a href="{% url 'catalog:contacts' %}" class="text-white">Контакты</a></li>
                     <li><a href="#" class="text-white">Вход / Регистрация</a></li>
                 </ul>
             </div>
