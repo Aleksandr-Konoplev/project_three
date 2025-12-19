@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+{% load my_tags %}
+{% block content %}
+
+<div class="py-5 bg-body-tertiary">
+    <div class="container">
+        <!-- Одиночная карточка продукта -->
+        <div class="card mb-4 border-0 shadow-sm">
+            <div class="row g-0">
+                <h1>Форма заполнения поста</h1>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+
+                    <button type="submit" class="btn btn-primary">Создать пост</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

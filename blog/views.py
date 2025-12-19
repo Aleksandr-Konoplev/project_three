@@ -17,18 +17,28 @@ class PostDetailView(DetailView):
     template_name = 'blog/post_detail.html'
     context_object_name = 'post'
 
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        self.object.views_count += 1
+        self.object.save()
+        return self.object
+
 
 class PostCreateView(CreateView):
     model = Post
+    template_name = 'blog/post_form.html'
     fields = ('title', 'content', 'image',)
-    success_url = reverse_lazy(':pass')
+    success_url = reverse_lazy('blog:posts_list')
 
 
 class PostUpdateView(UpdateView):
     model = Post
-    pass
+    template_name = 'blog/post_form.html'
+    fields = ('title', 'content', 'image',)
+    success_url = reverse_lazy('blog:posts_list')
 
 
 class PostDeleteView(DeleteView):
     model = Post
-    pass
+    template_name = 'blog/delete_post.html'
+    success_url = reverse_lazy('blog:posts_list')

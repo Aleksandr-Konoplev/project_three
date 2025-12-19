@@ -6,15 +6,15 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 class ProductsListView(ListView):
     model = Product
-    template_name = 'product_list.html'
+    template_name = 'catalog/product_list.html'
     context_object_name = 'products'
 
 
 class ProductDetailView(DetailView):
     model = Product
-    template_name = 'product_detail.html'
+    template_name = 'catalog/product_detail.html'
     context_object_name = 'product'
 
 
 class ContactsTemplateView(TemplateView):
-    template_name = 'contacts.html'
+    template_name = 'catalog/contacts.html'

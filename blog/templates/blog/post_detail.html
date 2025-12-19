@@ -1,0 +1,48 @@
+{% extends 'blog/base.html' %}
+{% load my_tags %}
+
+{% block content %}
+<!--suppress ALL -->
+<div class="py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="card border-0 shadow-sm mx-auto" style="max-width: 900px;">
+            <div class="card-body p-4">
+
+                <h2 class="card-title mb-3">{{ post.title }}</h2>
+
+                {% if post.image %}
+                    <img src="{{ post.image|media_filter }}"
+                         class="img-fluid rounded mb-4"
+                         alt="{{ post.title }}">
+                {% endif %}
+
+                <div class="card-text fs-5 mb-4">
+                    {{ post.content }}
+                </div>
+
+                <div class="d-flex align-items-center mt-5">
+
+                    <!-- Левая группа -->
+                    <div class="d-flex align-items-center gap-3">
+                        <a href="{% url 'blog:posts_list' %}" class="btn btn-outline-secondary">
+                            Назад
+                        </a>
+
+                        <span class="text-muted">
+                            {{ post.views_count }} &#128065;
+                        </span>
+                    </div>
+
+                    <!-- Правая кнопка -->
+                    <a href="{% url 'blog:post_delete' post.pk %}"
+                       class="btn btn-outline-danger ms-auto">
+                        Удалить пост
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
