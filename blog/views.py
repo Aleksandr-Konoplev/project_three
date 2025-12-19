@@ -11,6 +11,11 @@ class PostsListView(ListView):
     template_name = 'blog/posts_list.html'
     context_object_name = 'posts'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(publication_flag=True)
+        return queryset
+
 
 class PostDetailView(DetailView):
     model = Post
@@ -27,7 +32,7 @@ class PostDetailView(DetailView):
 class PostCreateView(CreateView):
     model = Post
     template_name = 'blog/post_form.html'
-    fields = ('title', 'content', 'image',)
+    fields = ('title', 'content', 'image', 'publication_flag',)
     success_url = reverse_lazy('blog:posts_list')
 
 
