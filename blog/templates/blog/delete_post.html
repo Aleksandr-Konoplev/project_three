@@ -1,24 +1,42 @@
 {% extends 'blog/base.html' %}
 {% load my_tags %}
-{% block content %}
 
+{% block content %}
 <div class="py-5 bg-body-tertiary">
     <div class="container">
-        <!-- Одиночная карточка продукта -->
-        <div class="card mb-4 border-0 shadow-sm">
-            <div class="row g-0">
-                <h1>Удаление поста</h1>
-                <form method="post" enctype="multipart/form-data">
+        <div class="card border-0 shadow-sm mx-auto" style="max-width: 700px;">
+            <div class="card-body p-4 text-center">
+
+                <!-- Заголовок -->
+                <h2 class="text-danger mb-3">Удаление поста</h2>
+
+                <!-- Предупреждение -->
+                <p class="fs-5">
+                    Вы действительно хотите удалить пост
+                    <strong>«{{ object.title }}»</strong>?
+                </p>
+
+                <p class="text-muted">
+                    Это действие невозможно отменить.
+                </p>
+
+                <!-- Кнопки -->
+                <form method="post" class="mt-4 d-flex justify-content-center gap-3">
                     {% csrf_token %}
 
-                    {{ form.as_p }}
+                    <a href="{% url 'blog:post_detail' object.pk %}"
+                       class="btn btn-outline-secondary px-4">
+                        Отмена
+                    </a>
 
-                    <button type="submit" class="btn btn-primary">Удалить пост</button>
-                    <a href="{% url 'blog:posts_list' %}" class="btn btn-sm btn-outline-secondary">Назад</a>
+                    <button type="submit"
+                            class="btn btn-danger px-4">
+                        Удалить
+                    </button>
                 </form>
+
             </div>
         </div>
     </div>
 </div>
-
 {% endblock %}

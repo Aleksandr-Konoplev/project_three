@@ -1,23 +1,61 @@
 {% extends 'blog/base.html' %}
 {% load my_tags %}
-{% block content %}
 
+{% block content %}
 <div class="py-5 bg-body-tertiary">
     <div class="container">
-        <!-- Одиночная карточка продукта -->
-        <div class="card mb-4 border-0 shadow-sm">
-            <div class="row g-0">
-                <h1>Форма заполнения поста</h1>
+        <div class="card border-0 shadow-sm mx-auto" style="max-width: 900px;">
+            <div class="card-body p-4">
+
+                <h2 class="text-center mb-4">
+                    {% if object %}
+                        Редактирование поста
+                    {% else %}
+                        Создание поста
+                    {% endif %}
+                </h2>
+
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
 
-                    {{ form.as_p }}
+                    <!-- Заголовок -->
+                    <div class="mb-3">
+                        <label class="form-label">Заголовок</label>
+                        {{ form.title|add_class:"form-control" }}
+                        {% if form.title.errors %}
+                            <div class="text-danger small">{{ form.title.errors }}</div>
+                        {% endif %}
+                    </div>
 
-                    <button type="submit" class="btn btn-primary">Создать пост</button>
+                    <!-- Контент -->
+                    <div class="mb-3">
+                        <label class="form-label">Текст поста</label>
+                        {{ form.content|add_class:"form-control" }}
+                        {% if form.content.errors %}
+                            <div class="text-danger small">{{ form.content.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Изображение -->
+                    <div class="mb-4">
+                        <label class="form-label">Изображение</label>
+                        {{ form.image|add_class:"form-control" }}
+                        {% if form.image.errors %}
+                            <div class="text-danger small">{{ form.image.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Кнопки -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{% url 'blog:posts_list' %}" class="btn btn-outline-secondary">Назад</a>
+                        <button type="submit" class="btn btn-primary px-4">
+                            {% if object %}Сохранить изменения{% else %}Создать пост{% endif %}
+                        </button>
+                    </div>
+
                 </form>
             </div>
         </div>
     </div>
 </div>
-
 {% endblock %}
