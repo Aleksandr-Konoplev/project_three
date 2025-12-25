@@ -1,0 +1,29 @@
+{% load static %}
+<!--suppress HtmlUnknownTarget -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'blog:posts_list' %}">
+            <img alt="Главная" style="height: 40px;" class="navbar-logo"
+                src="{% static 'blog/img/logo/shopaholics_logo_light.png' %}"
+                data-logo-light="{% static 'blog/img/logo/shopaholics_logo_dark.png' %}"
+                data-logo-dark="{% static 'blog/img/logo/shopaholics_logo_light.png' %}">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'blog:post_create' %}">+ Добавить пост</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blog:posts_list' %}">Блог</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Контакты</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

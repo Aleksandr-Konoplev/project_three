@@ -1,0 +1,32 @@
+<!--suppress ALL -->
+<div class="collapse text-bg-dark" id="navbarHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-md-7 py-4"><h4>Tony Macarony</h4>
+                <p class="text-body-secondary">Наш магазин — это пространство современной итальянской моды, где стиль
+                    сочетается с качеством и комфортом. Мы предлагаем тщательно подобранные коллекции, созданные из
+                    премиальных материалов с вниманием к деталям и идеальной посадке.</p></div>
+            <div class="col-sm-4 offset-md-1 py-4 text-end"><h4>Меню</h4>
+                <ul class="list-unstyled text-end">
+                    <li><a href="{% url 'catalog:product_list' %}" title="Перейти на главную страницу" class="text-white">Главная</a></li>
+                    <li><a href="{% url 'catalog:contacts' %}" class="text-white">Контакты</a></li>
+                    <li><a href="#" class="text-white">Вход / Регистрация</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+        <a href="#" class="navbar-brand d-flex align-items-center"></a>
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarHeader"
+                aria-controls="navbarHeader"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>

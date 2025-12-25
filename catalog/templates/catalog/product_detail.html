@@ -1,0 +1,55 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block content %}
+
+<div class="py-5 bg-body-tertiary">
+    <div class="container">
+        <!-- Одиночная карточка продукта -->
+        <div class="card mb-4 border-0 shadow-sm">
+            <div class="row g-0">
+                <!-- Левая часть: изображение продукта -->
+                <div class="col-md-4">
+                    <img src="{{ product.image|media_filter }}" class="img-fluid rounded-start" alt="нет изображения" style="height: 100%; object-fit: cover;">
+                </div>
+                <!-- Правая часть: описание и кнопки -->
+                <div class="col-md-8 d-flex flex-column">
+                    <div class="card-body flex-grow-1 d-flex flex-column">
+                        <h3 class="card-title mb-3">{{ product.name }}</h3>
+                        <h5>Категория: {{ product.category }}</h5>
+                        <p class="card-text mb-4">{{ product.description }}</p>
+                        <div class="mt-auto">
+                            <!-- Цена -->
+                            <div class="d-flex justify-content-end align-items-center mb-3">
+                                <h5 class="mb-0">{{ product.price }} &#8381;</h5>
+                            </div>
+                            <div class="d-flex justify-content-end align-items-center mb-3">
+                                <h5 class="mb-0">В продаже с {{ product.created_at|date:'d M Y' }}</h5>
+                            </div>
+                            <!--Кнопки-->
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <!-- Кнопка "Назад" слева -->
+                                <a href="{% url 'catalog:product_list' %}" title="Вернутся ко всем товарам" class="btn btn-outline-secondary d-flex align-items-center">Назад</a>
+                                <!-- Кнопки справа -->
+                                <div class="btn-group">
+                                    <a title="Сделать быстрый заказ" class="btn btn-outline-secondary d-flex align-items-center">Быстрая покупка</a>
+                                    <a title="Добавить в корзину" class="btn btn-outline-secondary d-flex align-items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                            <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                            <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                            <path d="M17 17h-11v-14h-2" />
+                                            <path d="M6 5l14 1l-1 7h-13" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
