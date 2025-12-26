@@ -26,14 +26,6 @@ class CategoryForm(forms.ModelForm):
             }
         )
 
-    def clean(self):
-        """ Проверка на существование добавляемой категории """
-        pass
-
-    def clean_name(self):
-        """ Проверка не входит ли добавляемое название в список запрещенных """
-        pass
-
 
 class ProductForm(forms.ModelForm):
     class Meta:
@@ -86,11 +78,16 @@ class ProductForm(forms.ModelForm):
             raise ValidationError('Такой товар уже существует')
 
         # Проверка на наличие запрещенных слов
-        for word in FORBIDDEN_WORDS:
+        forbidden_words_list = FORBIDDEN_WORDS.split()
+        for word in forbidden_words_list:
             if word in name.lower():
-                raise ValidationError('В названии товара есть слово входящее в список запрещенных')
+                raise ValidationError(f'В названии товара есть слово "{word}" входящее в список запрещенных')
         return name
 
-    # def clean_name(self):
-    #     """ Проверка не входит ли добавляемое название в список запрещенных """
-    #     pass
+    def clean_price(self):
+        """ Проверка цены (не может быть отрицательной) """
+        price = self.cleaned_data.get('price')
+        if price <= 0:
+            raise ValidationError('Цена должна быть положительным числом')
+        return price
+
