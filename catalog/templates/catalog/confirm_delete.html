@@ -1,0 +1,22 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block content %}
+
+<div class="py-5 bg-body-tertiary">
+    <div class="container">
+        <!-- Форма -->
+        <div class="card mb-4 border-0 shadow-sm">
+            <div class="row g-0">
+                <form method="post">
+                    {% csrf_token %}
+                    <h4>Удалить {{ object.name }}?</h4>
+                    <button type="submit" class="btn btn-primary">Удалить продукт</button>
+                    <!--suppress HtmlUnknownTarget -->
+                    <a class="" href="{% url 'catalog:product_list' %}">Отмена</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
