@@ -32,7 +32,7 @@
                         <!--Кнопки-->
                         <div class="col-12 d-flex justify-content-center gap-2">
                             <button type="submit" class="btn btn-outline-danger d-flex align-items-center gap-1">Удалить товар</button>
-                            <a href="{% url 'catalog:product_list' %}" class="btn btn-outline-primary d-flex align-items-center gap-1">Отмена</a>
+                            <a href="{% url 'catalog:product_detail' object.pk %}" class="btn btn-outline-primary d-flex align-items-center gap-1">Отмена</a>
                         </div>
                     </div>
                 </form>
