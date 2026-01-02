@@ -1,5 +1,4 @@
 {% extends 'catalog/base.html' %}
-{% load catalog_tags %}
 {% block content %}
 
 <div class="py-5 bg-body-tertiary">
@@ -10,9 +9,9 @@
                 <form method="post" enctype="multipart/form-data" class="p-4">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button type="submit" class="btn btn-primary">Добавить продукт</button>
+                    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
                     <!--suppress HtmlUnknownTarget -->
-                    <a class="" href="{% if object %}{% url 'catalog:product_detail' object.pk %}{% else %}{% url 'catalog:product_list' %}{% endif %}">
+                    <a class="" href="#">
                         Назад
                     </a>
                 </form>
