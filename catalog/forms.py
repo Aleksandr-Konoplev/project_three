@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.core.files.uploadedfile import UploadedFile
 
-from .models import Product, Category
+from catalog.models import Product, Category
 from catalog.constants import FORBIDDEN_WORDS, MAX_IMAGE_SIZE, ALLOWED_IMAGE_FORMATS
 
 

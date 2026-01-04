@@ -1,0 +1,26 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+
+<div class="py-5 bg-body-tertiary">
+    <div class="container">
+        <!-- Форма -->
+        <div class="card mb-4 border-0 shadow-sm">
+            <div class="row g-0">
+                <form method="post" enctype="multipart/form-data" class="p-4">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="d-flex justify-content-center gap-3 mt-4">
+                        <button type="submit" class="btn btn-outline-primary">
+                            Зарегистрироваться
+                        </button>
+                        <a href="#" class="btn btn-outline-secondary">
+                            Назад
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

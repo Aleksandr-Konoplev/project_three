@@ -11,7 +11,17 @@
                     <li><a href="{% url 'catalog:product_list' %}" title="Перейти на главную страницу" class="text-white">Главная</a></li>
                     <li><a href="{% url 'catalog:add_product' %}" class="text-white">Добавить товар</a></li>
                     <li><a href="{% url 'catalog:contacts' %}" class="text-white">Контакты</a></li>
-                    <li><a href="#" class="text-white">Вход / Регистрация</a></li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <form action="{% url 'users:logout' %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link text-white p-0 m-0">Выход</button>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li><a href="{% url 'users:login' %}" class="text-white">Вход</a></li>
+                    <li><a href="{% url 'users:register' %}" class="text-white">Регистрация</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
