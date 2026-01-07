@@ -1,5 +1,5 @@
 {% extends 'catalog/base.html' %}
-{% load my_tags %}
+{% load catalog_tags %}
 {% block content %}
 
 <div class="py-5 bg-body-tertiary">
@@ -30,8 +30,9 @@
                                 <!-- Кнопка "Назад" слева -->
                                 <a href="{% url 'catalog:product_list' %}" title="Вернутся ко всем товарам" class="btn btn-outline-secondary d-flex align-items-center">Назад</a>
                                 <!-- Кнопки справа -->
-                                <div class="btn-group">
-                                    <a title="Сделать быстрый заказ" class="btn btn-outline-secondary d-flex align-items-center">Быстрая покупка</a>
+                                <div class="d-flex gap-2 mt-3">
+                                    <a href="{% url 'catalog:delete_product' product.pk %}" title="Удалить продукт" class="btn btn-outline-danger d-flex align-items-center">Удалить товар</a>
+                                    <a href="{% url 'catalog:update_product' product.pk %}" title="Редактировать товар" class="btn btn-outline-primary d-flex align-items-center">Редактировать товар</a>
                                     <a title="Добавить в корзину" class="btn btn-outline-secondary d-flex align-items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
