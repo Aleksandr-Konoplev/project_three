@@ -53,6 +53,9 @@ class Product(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True, verbose_name="Дата редактирования продукта"
     )
+    is_published = models.BooleanField(
+        default=False, verbose_name='Продукт опубликован'
+    )
     # Для линтера
     objects: Manager["Product"]
 
@@ -66,3 +69,6 @@ class Product(models.Model):
         verbose_name = "продукт"
         verbose_name_plural = "продукты"
         ordering = ["name"]
+        permissions = [
+            ('can_unpublish_product', 'Can unpublish product')
+        ]

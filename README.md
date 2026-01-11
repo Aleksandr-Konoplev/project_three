@@ -1,3 +1,5 @@
+дорааботать users/admin.py
+
 # Project Three
 
 Проект на **Django**, онлайн магазин и блог с отзывами

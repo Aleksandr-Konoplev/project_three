@@ -13,7 +13,7 @@ from catalog.views import (
 app_name = CatalogConfig.name
 
 urlpatterns = [
-    path("catalog/", ProductsListView.as_view(), name="product_list"),
+    path("", ProductsListView.as_view(), name="product_list"),
     path(
         "catalog/product/<int:pk>/detail/",
         ProductDetailView.as_view(),
