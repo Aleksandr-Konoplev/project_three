@@ -28,10 +28,10 @@
                     <a class="nav-link" href="{% url 'blog:post_create' %}" style="padding: 0.5rem 1rem;">+ Добавить пост</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="padding: 0.5rem 1rem;">+ Добавить товар</a>
+                    <a class="nav-link" href="{% url 'catalog:add_product' %}" style="padding: 0.5rem 1rem;">+ Добавить товар</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="padding: 0.5rem 1rem;">Контакты</a>
+                    <a class="nav-link" href="{% url 'catalog:contacts' %}" style="padding: 0.5rem 1rem;">Контакты</a>
                 </li>
 
                 {% if user.is_authenticated %}

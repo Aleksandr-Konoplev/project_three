@@ -1,12 +1,13 @@
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
-
-from catalog.models import Product
-from catalog.forms import ProductForm
 
 from django.views.generic import ListView, DetailView, TemplateView, View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
+
+from catalog.models import Product
+from catalog.forms import ProductForm
 
 
 class ProductsListView(ListView):
@@ -15,11 +16,13 @@ class ProductsListView(ListView):
     context_object_name = "products"
 
     def get_queryset(self):
+        user = self.request.user
         queryset = Product.objects.all()
 
-        # обычные пользователи видят только опубликованные
-        if not self.request.user.has_perm('catalog.can_unpublish_product'):
-            queryset = queryset.filter(is_published=True)
+        if not user.has_perm('catalog.can_unpublish_product'):
+            published = queryset.filter(is_published=True)
+            owner_prod = queryset.filter(owner=user)
+            queryset = published | owner_prod
 
         return queryset
 
@@ -36,6 +39,10 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     template_name = "catalog/form_product.html"
     success_url = reverse_lazy("catalog:product_list")
 
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
@@ -43,11 +50,27 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "catalog/form_product.html"
     success_url = reverse_lazy("catalog:product_list")
 
+    def dispatch(self, request, *args, **kwargs):
+        product = self.get_object()
+
+        if product.owner == request.user or request.user.has_perm('catalog.can_unpublish_product'):
+            return super().dispatch(request, *args, **kwargs)
+
+        raise PermissionDenied("Вы не можете редактировать этот товар.")
+
 
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = "catalog/confirm_delete.html"
     success_url = reverse_lazy("catalog:product_list")
+
+    def dispatch(self, request, *args, **kwargs):
+        product = self.get_object()
+
+        if product.owner == request.user or request.user.has_perm('catalog.can_unpublish_product'):
+            return super().dispatch(request, *args, **kwargs)
+
+        raise PermissionDenied("Вы не можете редактировать этот товар.")
 
 
 class TogglePublication(LoginRequiredMixin, PermissionRequiredMixin, View):
@@ -57,10 +80,12 @@ class TogglePublication(LoginRequiredMixin, PermissionRequiredMixin, View):
     def post(request, pk):
         product = get_object_or_404(Product, pk=pk)
 
-        product.is_published = not product.is_published
-        product.save(update_fields=['is_published'])
+        if product.owner == request.user or request.user.has_perm('catalog.can_unpublish_product'):
+            product.is_published = not product.is_published
+            product.save(update_fields=['is_published'])
+            return redirect('catalog:product_list')
 
-        return redirect('catalog:product_list')
+        raise PermissionDenied("Вы не можете редактировать этот товар.")
 
 
 class ContactsTemplateView(TemplateView):

@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.manager import Manager
+from users.models import User
 
 
 class Category(models.Model):
@@ -55,6 +56,14 @@ class Product(models.Model):
     )
     is_published = models.BooleanField(
         default=False, verbose_name='Продукт опубликован'
+    )
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='products',
+        null=True,
+        blank=True,
+        verbose_name='Продавец'
     )
     # Для линтера
     objects: Manager["Product"]
