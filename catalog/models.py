@@ -58,6 +58,7 @@ class Product(models.Model):
     )
     # Для линтера
     objects: Manager["Product"]
+    object: Manager["Product"]
 
     def __str__(self):
         return f"{self.name} {self.price}"

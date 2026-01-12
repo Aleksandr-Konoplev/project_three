@@ -32,16 +32,34 @@
                                 <a href="{% url 'catalog:product_list' %}" title="Вернутся ко всем товарам" class="btn btn-outline-secondary d-flex align-items-center">Назад</a>
                                 <!-- Кнопки "Удалить" и "Редактировать" справа -->
                                 <div class="d-flex gap-2">
-                                    {% for group in user.groups.all %}
-                                        {% if group.name == 'Moderators product' %}
-                                        <!--Кнопка Снять с публикации -->
-                                        <a href="№" title="Снять с публикации" class="btn btn-outline-danger d-flex align-items-center">Снять с публикации</a>
-                                        <!--Кнопка Удалить -->
-                                        <a href="{% url 'catalog:delete_product' product.pk %}" title="Удалить продукт" class="btn btn-outline-danger d-flex align-items-center">Удалить товар</a>
-                                        <!-- Кнопка редактировать-->
-                                        <a href="{% url 'catalog:update_product' product.pk %}" title="Редактировать товар" class="btn btn-outline-primary d-flex align-items-center">Редактировать товар</a>
+                                    {% if perms.catalog.can_unpublish_product %}
+                                    <form method="post" action="{% url 'catalog:toggle_publication' product.pk %}">
+                                        {% csrf_token %}
+
+                                        {% if product.is_published %}
+                                            <button type="submit"
+                                                    class="btn btn-outline-danger d-flex align-items-center">
+                                                Снять с публикации
+                                            </button>
+                                        {% else %}
+                                            <button type="submit"
+                                                    class="btn btn-outline-success d-flex align-items-center">
+                                                Опубликовать
+                                            </button>
                                         {% endif %}
-                                    {% endfor %}
+                                    </form>
+
+                                    <a href="{% url 'catalog:delete_product' product.pk %}"
+                                       class="btn btn-outline-danger d-flex align-items-center">
+                                        Удалить товар
+                                    </a>
+
+                                    <a href="{% url 'catalog:update_product' product.pk %}"
+                                       class="btn btn-outline-primary d-flex align-items-center">
+                                        Редактировать товар
+                                    </a>
+                                    {% endif %}
+
                                     <!-- Кнопка добавить в корзину-->
                                     <a title="Добавить в корзину" class="btn btn-outline-secondary d-flex align-items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

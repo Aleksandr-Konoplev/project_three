@@ -8,6 +8,7 @@ from catalog.views import (
     ProductCreateView,
     ProductUpdateView,
     ProductDeleteView,
+    TogglePublication,
 )
 
 app_name = CatalogConfig.name
@@ -31,4 +32,9 @@ urlpatterns = [
         name="delete_product",
     ),
     path("catalog/contacts/", ContactsTemplateView.as_view(), name="contacts"),
+    path(
+    'product/<int:pk>/toggle-publication/',
+    TogglePublication.as_view(),
+    name='toggle_publication'
+),
 ]
