@@ -1,8 +1,12 @@
 {% extends 'catalog/base.html' %}
 {% load catalog_tags %}
 {% block content %}
-<div class="album py-5 bg-body-tertiary">
+    <div class="album bg-body-tertiary">
+        {% include 'catalog/includes/category_navbar.html' %}
         <div class="container">
+            <h2 class="mb-4 text-center">
+                Все товары
+            </h2>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 {% for product in products %}
                 <div class="col">
