@@ -1,0 +1,23 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary py-3">
+    <div class="container justify-content-center">
+        <div class="navbar-nav">
+
+            <!-- Ссылка "Все товары" -->
+            <a class="nav-link"
+               href="{% url 'catalog:product_list' %}">
+                Все товары
+            </a>
+
+            <!-- Цикл по категориям -->
+            {% for category in categories %}
+                <a class="nav-link"
+                   href="{% url 'catalog:products_by_category' category.id %}">
+                    {{ category.name }}
+                </a>
+            {% endfor %}
+
+        </div>
+    </div>
+</nav>

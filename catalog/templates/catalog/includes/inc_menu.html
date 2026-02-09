@@ -1,43 +1,75 @@
-<!--suppress ALL -->
-<div class="collapse text-bg-dark" id="navbarHeader">
+{% load static %}
+<!--suppress HtmlUnknownTarget -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding: 0.5rem 1rem;">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-8 col-md-7 py-4"><h4>Tony Macarony</h4>
-                <p class="text-body-secondary">Наш магазин — это пространство современной итальянской моды, где стиль
-                    сочетается с качеством и комфортом. Мы предлагаем тщательно подобранные коллекции, созданные из
-                    премиальных материалов с вниманием к деталям и идеальной посадке.</p></div>
-            <div class="col-sm-4 offset-md-1 py-4 text-end"><h4>Меню</h4>
-                <ul class="list-unstyled text-end">
-                    <li><a href="{% url 'catalog:product_list' %}" title="Перейти на главную страницу" class="text-white">Главная</a></li>
-                    <li><a href="{% url 'catalog:add_product' %}" class="text-white">Добавить товар</a></li>
-                    <li><a href="{% url 'catalog:contacts' %}" class="text-white">Контакты</a></li>
-                    {% if user.is_authenticated %}
-                    <li>
-                        <form action="{% url 'users:logout' %}" method="post" class="d-inline">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-link text-white p-0 m-0">Выход</button>
-                        </form>
-                    </li>
-                    {% else %}
-                    <li><a href="{% url 'users:login' %}" class="text-white">Вход</a></li>
-                    <li><a href="{% url 'users:register' %}" class="text-white">Регистрация</a></li>
-                    {% endif %}
-                </ul>
-            </div>
+        <a class="navbar-brand" href="{% url 'catalog:product_list' %}" style="display: flex; align-items: center;">
+            <img alt="Главная"
+                 src="{% static 'blog/img/logo/shopaholics_logo_light.png' %}"
+                 data-logo-light="{% static 'blog/img/logo/shopaholics_logo_dark.png' %}"
+                 data-logo-dark="{% static 'blog/img/logo/shopaholics_logo_light.png' %}"
+                 style="height: 40px;">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto" style="align-items: center;">
+
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#" style="padding: 0.5rem 1rem;">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blog:posts_list' %}" style="padding: 0.5rem 1rem;">Блог</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blog:post_create' %}" style="padding: 0.5rem 1rem;">+ Добавить пост</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'catalog:add_product' %}" style="padding: 0.5rem 1rem;">+ Добавить товар</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'catalog:contacts' %}" style="padding: 0.5rem 1rem;">Контакты</a>
+                </li>
+
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center"
+                       href="#"
+                       id="userDropdown"
+                       role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false"
+                       style="height: 50px; padding: 0 0.5rem;">
+
+                        <img src="{% if user.avatar %}{{ user.avatar.url }}{% else %}/media/users/avatars/default.png{% endif %}"
+                             alt="avatar"
+                             class="rounded-circle me-2"
+                             style="width: 40px; height: 40px; object-fit: cover; flex-shrink: 0;">
+
+                        <span class="d-none d-lg-inline" style="line-height: 40px;">{{ user.email }}</span>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
+                        <li class="dropdown-item-text small text-muted">{{ user.email }}</li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form method="post" action="{% url 'users:logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item text-danger">Выйти</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:login' %}" style="padding: 0.5rem 1rem;">Войти</a>
+                </li>
+                {% endif %}
+
+            </ul>
         </div>
     </div>
-</div>
-<div class="navbar navbar-dark bg-dark shadow-sm">
-    <div class="container">
-        <a href="#" class="navbar-brand d-flex align-items-center"></a>
-        <button class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarHeader"
-                aria-controls="navbarHeader"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
+</nav>

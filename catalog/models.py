@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.manager import Manager
+from users.models import User
 
 
 class Category(models.Model):
@@ -53,8 +54,20 @@ class Product(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True, verbose_name="Дата редактирования продукта"
     )
+    is_published = models.BooleanField(
+        default=False, verbose_name='Продукт опубликован'
+    )
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='products',
+        null=True,
+        blank=True,
+        verbose_name='Продавец'
+    )
     # Для линтера
     objects: Manager["Product"]
+    object: Manager["Product"]
 
     def __str__(self):
         return f"{self.name} {self.price}"
@@ -66,3 +79,6 @@ class Product(models.Model):
         verbose_name = "продукт"
         verbose_name_plural = "продукты"
         ordering = ["name"]
+        permissions = [
+            ('can_unpublish_product', 'Can unpublish product')
+        ]
