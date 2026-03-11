@@ -1,7 +1,8 @@
-{% extends 'base.html' %}
-{% load my_tags %}
+{% extends 'catalog/base.html' %}
+{% load catalog_tags %}
 {% block content %}
 
+<!--suppress ALL -->
 <div class="py-5 bg-body-tertiary">
     <div class="container">
         <!-- Одиночная карточка продукта -->
@@ -26,12 +27,41 @@
                                 <h5 class="mb-0">В продаже с {{ product.created_at|date:'d M Y' }}</h5>
                             </div>
                             <!--Кнопки-->
-                            <div class="d-flex justify-content-between align-items-center mt-2">
+                            <div class="d-flex justify-content-between align-items-center mt-5">
                                 <!-- Кнопка "Назад" слева -->
                                 <a href="{% url 'catalog:product_list' %}" title="Вернутся ко всем товарам" class="btn btn-outline-secondary d-flex align-items-center">Назад</a>
-                                <!-- Кнопки справа -->
-                                <div class="btn-group">
-                                    <a title="Сделать быстрый заказ" class="btn btn-outline-secondary d-flex align-items-center">Быстрая покупка</a>
+                                <!-- Кнопки "Удалить" и "Редактировать" справа -->
+                                <div class="d-flex gap-2">
+                                    {% if user.is_authenticated %}
+                                        {% if user == product.owner or perms.catalog.can_unpublish_product %}
+
+                                            <form method="post"
+                                                  action="{% url 'catalog:toggle_publication' product.pk %}">
+                                                {% csrf_token %}
+                                                <button class="btn {% if product.is_published %}btn-outline-danger{% else %}btn-outline-success{% endif %}">
+                                                    {% if product.is_published %}
+                                                        Снять с публикации
+                                                    {% else %}
+                                                        Опубликовать
+                                                    {% endif %}
+                                                </button>
+                                            </form>
+
+                                            <a href="{% url 'catalog:update_product' product.pk %}"
+                                               class="btn btn-outline-primary">
+                                                Редактировать
+                                            </a>
+
+                                            <a href="{% url 'catalog:delete_product' product.pk %}"
+                                               class="btn btn-outline-danger">
+                                                Удалить
+                                            </a>
+
+                                        {% endif %}
+                                    {% endif %}
+
+
+                                    <!-- Кнопка добавить в корзину-->
                                     <a title="Добавить в корзину" class="btn btn-outline-secondary d-flex align-items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
