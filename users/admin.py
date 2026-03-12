@@ -1,26 +1,4 @@
-# from django.contrib import admin
-# from django.contrib.auth.admin import UserAdmin
-# from users.models import User
-#
-#
-# @admin.register(User)
-# class UserAdmin(admin.ModelAdmin):
-#     list_display = (
-#         "id",
-#         "email",
-#         "country",
-#     )
-#     list_filter = ("country",)
-#     search_fields = ("email",)
-######################
-
-
 from django.contrib import admin
-# Импорт стандартного UserAdmin Django.
-# Он УМЕЕТ:
-#  - хешировать пароли
-#  - показывать кнопку "Сменить пароль"
-#  - работать с password1 / password2
 from django.contrib.auth.admin import UserAdmin
 
 from users.models import User
