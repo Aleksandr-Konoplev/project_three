@@ -15,7 +15,7 @@ class Command(BaseCommand):
             is_active=True,
             is_staff=True,
             is_superuser=True,
-            avatar='users/avatars/image_1.png'
+            avatar='users/avatars/admin.png'
         )
         user.set_password("1234qwer")
         user.save()
