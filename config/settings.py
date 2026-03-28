@@ -19,6 +19,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True if os.getenv('DEBUG') == 'True' else False
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['*']
 
 
 # Application definition
@@ -150,6 +151,6 @@ if CACHES_ENABLED:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-            'LOCATION': 'redis://redis:6379/1',
+            'LOCATION': 'redis://localhost:6379/1',
         }
     }
