@@ -82,5 +82,5 @@ jobs:
           docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/project_three:${{ github.sha }}
           docker stop project_three || true
           docker rm project_three || true
-          docker run -d --name project_three -p 80:8000 ${{ secrets.DOCKER_HUB_USERNAME }}/project_three:${{ github.sha }}
+          docker run -d --name project_three -p 8000:8000 ${{ secrets.DOCKER_HUB_USERNAME }}/project_three:${{ github.sha }}
           EOF
