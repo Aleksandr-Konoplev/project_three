@@ -157,9 +157,9 @@ if CACHES_ENABLED:
     }
 
 # Настройки для тестирования
-if 'tests' in sys.argv:
+if 'test' in sys.argv:
     DATABASES = {
-        'DEFAULT': {
+        'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'test_db.sqlite3',
         }
